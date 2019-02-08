@@ -1,69 +1,85 @@
-import React from "react";
-import { View, Text, Button, Easing, Animated } from "react-native";
-import { createStackNavigator, createAppContainer } from "react-navigation";
+// import React from "react";
+// import { SafeAreaView } from "react-native";
+// import { connect } from 'react-redux';
+// import { Provider } from 'react-redux';
+// import {
+//     createReduxContainer,
+// } from 'react-navigation-redux-helpers';
+//
+// import RootStack from './navigators';
+// import { compose, createStore, applyMiddleware } from 'redux';
+// // import { AsyncStorage } from 'react-native';
+// import createSagaMiddleware from 'redux-saga';
+// // import { persistStore } from 'redux-persist';
+// import { createReactNavigationReduxMiddleware } from 'react-navigation-redux-helpers';
+// import rootReducer from './store/reducers';
+// import rootSaga from './store/sagas'
+//
+// // Note: createReactNavigationReduxMiddleware must be run before reduxifyNavigator
+// const middleware = createReactNavigationReduxMiddleware(
+//     state => state.nav,
+// );
+// const composeEnhancers = __DEV__
+//     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+//     : compose;
+//
+// const sagaMiddleware = createSagaMiddleware();
+//
+// const App = createReduxContainer(RootStack);
+//
+// const mapStateToProps = (state) => ({
+//     nav: state.nav,
+// });
+//
+// const AppWithNavigationState = connect(mapStateToProps)(App);
+//
+// const store = createStore(
+//     rootReducer,
+//     applyMiddleware(middleware),
+// );
+//
+//
+// /*const persistOptions = {
+//     whitelist: ['auth'],
+//     blacklist: ['navigation'],
+//     storage: AsyncStorage
+// };
+//
+// persistStore(store, persistOptions, () => {
+//
+// });*/
+//
+//
+// const Root = () => {
+//     return (
+//         <Provider store={store}>
+//             <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
+//                 <AppWithNavigationState />
+//             </SafeAreaView>
+//         </Provider>
+//     )
+// };
+//
+// export default Root;
+import { PersistGate } from 'redux-persist/integration/react'
+import { Provider } from 'react-redux';
+import React from 'react';
+import AppNavigator from './navigators';
 
-import HomeScreen from './screens/Home';
-import DetailsScreen from './screens/Details';
-import ModalScreen from './screens/Modal';
+import configureStore from './store';
 
-const MainStack = createStackNavigator(
-    {
-        Home: HomeScreen,
-        Details: DetailsScreen,
-    },
-    {
-        initialRouteName: 'Home',
-        defaultNavigationOptions: {
-            headerStyle: {
-                backgroundColor: '#f4511e',
-            },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-                fontWeight: 'bold',
-            },
-        },
+const { store, persistor } = configureStore();
+
+class Root extends React.Component {
+    render() {
+        return (
+            <Provider store={store}>
+                <PersistGate loading={null} persistor={persistor}>
+                    <AppNavigator />
+                </PersistGate>
+            </Provider>
+        );
     }
-);
+}
 
-const RootStack = createStackNavigator(
-    {
-        Main: {
-            screen: MainStack,
-        },
-        MyModal: {
-            screen: ModalScreen,
-        },
-    },
-    {
-        mode: 'modal',
-        headerMode: 'none',
-        initialRouteName: 'Main',
-        transitionConfig: () => ({
-            transitionSpec: {
-                duration: 750,
-                easing: Easing.out(Easing.poly(4)),
-                timing: Animated.timing,
-                useNativeDriver: true,
-            },
-            screenInterpolator: sceneProps => {
-                const { layout, position, scene } = sceneProps;
-                const thisSceneIndex = scene.index;
-
-                const height = layout.initHeight;
-                const translateY = position.interpolate({
-                    inputRange: [thisSceneIndex - 1, thisSceneIndex, thisSceneIndex + 1],
-                    outputRange: [height, 0, 0],
-                });
-
-                const opacity = position.interpolate({
-                    inputRange: [thisSceneIndex - 1, thisSceneIndex, thisSceneIndex + 1],
-                    outputRange: [1, 1, 0.5],
-                });
-
-                return { opacity, transform: [{ translateY }] };
-            },
-        }),
-    }
-);
-
-export default createAppContainer(RootStack);
+export default Root;
