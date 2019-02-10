@@ -1,5 +1,5 @@
 import { put, call } from 'redux-saga/effects'
-import { successLogin, failLogin } from './../actions/auth'
+import { successLogin, failLogin } from '../actions/auth'
 
 export function* loginEmail (api, { payload }) {
     try{

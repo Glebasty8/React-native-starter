@@ -5,6 +5,6 @@ import { loginEmail } from './../sagas/auth';
 
 export default function* root () {
     yield all([
-        takeLatest(LOGIN_START, loginEmail),
+        // takeLatest(LOGIN_START, loginEmail),
     ]);
 }

@@ -14,6 +14,7 @@ export default (state = defaultState, { type, payload }) => {
         case LOGIN_START:
             return {
                 ...state,
+                user: {},
                 isLoading: true,
             };
         default:

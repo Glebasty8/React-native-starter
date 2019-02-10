@@ -1,5 +1,9 @@
 import React from "react";
 import {Button, Text, View} from "react-native";
+import { SafeAreaView } from 'react-native';
+import { connect } from 'react-redux';
+
+import { startLogin } from './../store/actions/auth';
 
 class HomeScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
@@ -17,19 +21,22 @@ class HomeScreen extends React.Component {
 
     render() {
         return (
-            <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-                <Text>Home Screen</Text>
-                <Button
-                    title="Go to Details"
-                    onPress={() => this.props.navigation.navigate('Details', {
-                        itemId: 86,
-                        otherParam: 'anything you want here',
-                    })}
+                <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+                    <Text>Home Screen</Text>
+                    <Button
+                        title="Go to Details"
+                        onPress={() => {
+                            this.props.startLogin();
+                            this.props.navigation.navigate('Details', {
+                                itemId: 86,
+                                otherParam: 'anything you want here',
+                            })
+                        }}
 
-                />
-            </View>
+                    />
+                </View>
         );
     }
 }
 
-export default HomeScreen;
+export default connect(null, { startLogin })(HomeScreen);
