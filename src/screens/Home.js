@@ -1,7 +1,7 @@
 import React from "react";
 import {Button, Text, View} from "react-native";
-import { SafeAreaView } from 'react-native';
 import { connect } from 'react-redux';
+import PushNotifications from '../components/PushNotifications';
 
 import { startLogin } from './../store/actions/auth';
 
@@ -32,8 +32,8 @@ class HomeScreen extends React.Component {
                                 otherParam: 'anything you want here',
                             })
                         }}
-
                     />
+                    <PushNotifications />
                 </View>
         );
     }

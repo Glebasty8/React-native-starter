@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { AppState } from 'react-native';
+import { AppState, Platform } from 'react-native';
 import styled from 'styled-components/native';
+import PushNotification from 'react-native-push-notification';
 
 import { normalize } from './../utils';
 
@@ -25,6 +26,16 @@ class NotificationsScreen extends Component {
     };
 
     componentDidMount() {
+        let date = new Date(Date.now());
+
+        if (Platform.OS === 'ios') {
+            date = date.toISOString();
+        }
+        PushNotification.localNotificationSchedule({
+            title: "My Notification Title",
+            message: "My Notification Message",
+            date,
+        });
         AppState.addEventListener('change', this.handleAppStateChange)
     }
 
@@ -34,7 +45,16 @@ class NotificationsScreen extends Component {
 
     handleAppStateChange = (AppState) => {
         if (AppState === 'background') {
-            // TODO: Schedule background notifications
+            let date = new Date(Date.now() + (this.state.seconds * 1000));
+
+            if (Platform.OS === 'ios') {
+                date = date.toISOString();
+            }
+            PushNotification.localNotificationSchedule({
+                title: "My Notification Title",
+                message: "My Notification Message",
+                date,
+            });
             console.log('app is in background', this.state.seconds);
         }
     };
