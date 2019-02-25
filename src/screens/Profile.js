@@ -4,7 +4,7 @@ import { WebView } from "react-native-webview";
 const ProfileScreen = () => {
     return (
         <WebView
-            source={{ uri: "https://finx:hamburg2019@test.finexity.com" }}
+            source={{ uri: "https://github.com/facebook/react-native" }}
             style={{ marginTop: 20 }}
             originWhitelist={['*']}
         />

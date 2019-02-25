@@ -26,16 +26,6 @@ class NotificationsScreen extends Component {
     };
 
     componentDidMount() {
-        let date = new Date(Date.now());
-
-        if (Platform.OS === 'ios') {
-            date = date.toISOString();
-        }
-        PushNotification.localNotificationSchedule({
-            title: "My Notification Title",
-            message: "My Notification Message",
-            date,
-        });
         AppState.addEventListener('change', this.handleAppStateChange)
     }
 

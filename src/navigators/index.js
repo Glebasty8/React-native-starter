@@ -9,7 +9,7 @@ import ModalScreen from "../screens/Modal";
 import WelcomeScreen from "../screens/Welcome";
 import FeedScreen from "../screens/Feed";
 import ProfileScreen from "../screens/Profile";
-import SettingsScreen from "../screens/Settings";
+import MapScreen from "../screens/Map";
 import NotificationsScreen from "../screens/Notifications";
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -53,10 +53,10 @@ const ProfileStack = createStackNavigator(
     },
 );
 
-const SettingsStack = createStackNavigator(
+const MapStack = createStackNavigator(
     {
-        Settings: {
-            screen: SettingsScreen,
+        Map: {
+            screen: MapScreen,
             navigationOptions: ({ navigation }) => {
                 return {
                     headerLeft: <Icon
@@ -93,7 +93,7 @@ const DashboardTabNavigator = createBottomTabNavigator(
     {
         Feed: FeedStack,
         Profile: ProfileStack,
-        Settings: SettingsStack,
+        Map: MapStack,
         Notification: NotificationStack
     },
     {
