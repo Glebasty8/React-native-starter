@@ -1,8 +1,4 @@
-import {
-    LOGIN_START,
-    LOGIN_SUCCESS,
-    LOGIN_FAIL,
-} from './../types/auth';
+import { LOGIN_START, LOGIN_SUCCESS, LOGIN_FAIL } from '../types/auth';
 
 const defaultState = {
     user: null,

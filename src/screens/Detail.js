@@ -8,6 +8,6 @@ const DetailScreen = ({ navigation }) => {
             <Button title="Go back" onPress={() => navigation.goBack(null)} />
         </View>
     );
-}
+};
 
 export default DetailScreen;

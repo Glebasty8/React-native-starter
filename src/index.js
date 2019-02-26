@@ -1,6 +1,6 @@
 import React from 'react';
 import { SafeAreaView } from 'react-native';
-import { PersistGate } from 'redux-persist/integration/react'
+import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
 import AppNavigator from './navigators';
 
@@ -13,7 +13,7 @@ class Root extends React.Component {
         return (
             <Provider store={store}>
                 <PersistGate loading={null} persistor={persistor}>
-                        <AppNavigator />
+                    <AppNavigator />
                 </PersistGate>
             </Provider>
         );

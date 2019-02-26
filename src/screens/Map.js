@@ -8,7 +8,7 @@ const Container = styled.View`
     left: 0;
     right: 0;
     bottom: 0;
-    justifyContent: flex-end;
+    justify-content: flex-end;
     align-items: center;
 `;
 

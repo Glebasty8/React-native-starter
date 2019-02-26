@@ -1,17 +1,23 @@
-import React from "react";
-import {Animated, Easing} from "react-native";
+import React from 'react';
+import { Animated, Easing } from 'react-native';
 
-import {createStackNavigator, createAppContainer, createSwitchNavigator, createDrawerNavigator, createBottomTabNavigator} from "react-navigation";
-import HomeScreen from "../screens/Home";
-import DetailsScreen from "../screens/Details";
-import DetailScreen from "../screens/Detail";
-import ModalScreen from "../screens/Modal";
-import WelcomeScreen from "../screens/Welcome";
-import FeedScreen from "../screens/Feed";
-import ProfileScreen from "../screens/Profile";
-import MapScreen from "../screens/Map";
-import NotificationsScreen from "../screens/Notifications";
+import {
+    createStackNavigator,
+    createAppContainer,
+    createSwitchNavigator,
+    createDrawerNavigator,
+    createBottomTabNavigator,
+} from 'react-navigation';
 import Icon from 'react-native-vector-icons/Ionicons';
+import HomeScreen from '../screens/Home';
+import DetailsScreen from '../screens/Details';
+import DetailScreen from '../screens/Detail';
+import ModalScreen from '../screens/Modal';
+import WelcomeScreen from '../screens/Welcome';
+import FeedScreen from '../screens/Feed';
+import ProfileScreen from '../screens/Profile';
+import MapScreen from '../screens/Map';
+import NotificationsScreen from '../screens/Notifications';
 
 const FeedStack = createStackNavigator(
     {
@@ -19,117 +25,121 @@ const FeedStack = createStackNavigator(
             screen: FeedScreen,
             navigationOptions: ({ navigation }) => {
                 return {
-                    headerLeft: <Icon
-                        style={{ paddingLeft: 10 }}
-                        onPress={navigation.openDrawer}
-                        name="md-menu" size={30}
-                    />
-                }
-            }
+                    headerLeft: (
+                        <Icon
+                            style={{ paddingLeft: 10 }}
+                            onPress={navigation.openDrawer}
+                            name="md-menu"
+                            size={30}
+                        />
+                    ),
+                };
+            },
         },
         Detail: DetailScreen,
     },
     {
         defaultNavigationOptions: {
             gesturesEnabled: false,
-        }
+        },
     }
 );
 
-const ProfileStack = createStackNavigator(
-    {
-        Profile: {
-            screen: ProfileScreen,
-            navigationOptions: ({ navigation }) => {
-                return {
-                    headerLeft: <Icon
+const ProfileStack = createStackNavigator({
+    Profile: {
+        screen: ProfileScreen,
+        navigationOptions: ({ navigation }) => {
+            return {
+                headerLeft: (
+                    <Icon
                         style={{ paddingLeft: 10 }}
                         onPress={navigation.openDrawer}
-                        name="md-menu" size={30}
+                        name="md-menu"
+                        size={30}
                     />
-                }
-            }
+                ),
+            };
         },
     },
-);
+});
 
-const MapStack = createStackNavigator(
-    {
-        Map: {
-            screen: MapScreen,
-            navigationOptions: ({ navigation }) => {
-                return {
-                    headerLeft: <Icon
+const MapStack = createStackNavigator({
+    Map: {
+        screen: MapScreen,
+        navigationOptions: ({ navigation }) => {
+            return {
+                headerLeft: (
+                    <Icon
                         style={{ paddingLeft: 10 }}
                         onPress={navigation.openDrawer}
-                        name="md-menu" size={30}
+                        name="md-menu"
+                        size={30}
                     />
-                }
-            }
+                ),
+            };
         },
     },
-);
+});
 
-const NotificationStack = createStackNavigator(
-    {
-        Notification: {
-            screen: NotificationsScreen,
-            navigationOptions: ({ navigation }) => {
-                return {
-                    headerLeft: <Icon
+const NotificationStack = createStackNavigator({
+    Notification: {
+        screen: NotificationsScreen,
+        navigationOptions: ({ navigation }) => {
+            return {
+                headerLeft: (
+                    <Icon
                         style={{ paddingLeft: 10 }}
                         onPress={navigation.openDrawer}
-                        name="md-menu" size={30}
+                        name="md-menu"
+                        size={30}
                     />
-                }
-            }
+                ),
+            };
         },
     },
-
-);
-
+});
 
 const DashboardTabNavigator = createBottomTabNavigator(
     {
         Feed: FeedStack,
         Profile: ProfileStack,
         Map: MapStack,
-        Notification: NotificationStack
+        Notification: NotificationStack,
     },
     {
         navigationOptions: ({ navigation }) => {
             const { routeName } = navigation.state.routes[navigation.state.index];
             return {
                 header: null,
-                headerTitle: routeName
-            }
-        }
+                headerTitle: routeName,
+            };
+        },
     }
 );
 
 const DashboardStackNavigator = createStackNavigator(
     {
-        DashboardTabNavigator: DashboardTabNavigator,
+        DashboardTabNavigator,
     },
     {
         defaultNavigationOptions: ({ navigation }) => {
             return {
-                headerLeft: <Icon
-                    style={{ paddingLeft: 10 }}
-                    onPress={navigation.openDrawer}
-                    name="md-menu" size={30}
-                />
-             }
-        }
+                headerLeft: (
+                    <Icon
+                        style={{ paddingLeft: 10 }}
+                        onPress={navigation.openDrawer}
+                        name="md-menu"
+                        size={30}
+                    />
+                ),
+            };
+        },
     }
 );
 
-
-const AppDrewerNavigator = createDrawerNavigator(
-    {
-        Dashboard: { screen: DashboardStackNavigator }
-    }
-);
+const AppDrewerNavigator = createDrawerNavigator({
+    Dashboard: { screen: DashboardStackNavigator },
+});
 
 const appSwitchNavigator = createSwitchNavigator(
     {

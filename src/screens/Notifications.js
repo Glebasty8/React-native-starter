@@ -3,16 +3,16 @@ import { AppState, Platform } from 'react-native';
 import styled from 'styled-components/native';
 import PushNotification from 'react-native-push-notification';
 
-import { normalize } from './../utils';
+import { normalize } from '../utils';
 
 const Container = styled.View`
     flex: 1;
-    alignItems: center;
-    justifyContent: center;
+    alignitems: center;
+    justifycontent: center;
 `;
 
 const Welcome = styled.Text`
-    fontSize: ${normalize(20)};
+    fontsize: ${normalize(20)};
     margin: ${normalize(10)}px;
 `;
 
@@ -26,23 +26,23 @@ class NotificationsScreen extends Component {
     };
 
     componentDidMount() {
-        AppState.addEventListener('change', this.handleAppStateChange)
+        AppState.addEventListener('change', this.handleAppStateChange);
     }
 
     componentWillUnmount() {
-        AppState.removeEventListener('change', this.handleAppStateChange)
+        AppState.removeEventListener('change', this.handleAppStateChange);
     }
 
-    handleAppStateChange = (AppState) => {
+    handleAppStateChange = AppState => {
         if (AppState === 'background') {
-            let date = new Date(Date.now() + (this.state.seconds * 1000));
+            let date = new Date(Date.now() + this.state.seconds * 1000);
 
             if (Platform.OS === 'ios') {
                 date = date.toISOString();
             }
             PushNotification.localNotificationSchedule({
-                title: "My Notification Title",
-                message: "My Notification Message",
+                title: 'My Notification Title',
+                message: 'My Notification Message',
                 date,
             });
             console.log('app is in background', this.state.seconds);
@@ -55,7 +55,7 @@ class NotificationsScreen extends Component {
                 <Welcome>Choose your notification time in seconds</Welcome>
                 <Picker
                     selectedValue={this.state.seconds}
-                    onValueChange={(seconds) => this.setState({ seconds})}
+                    onValueChange={seconds => this.setState({ seconds })}
                 >
                     <Picker.Item label="5" value={5} />
                     <Picker.Item label="10" value={10} />
