@@ -3,6 +3,7 @@ package com.reactnativeplayground;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import io.sentry.RNSentryPackage;
 import com.airbnb.android.react.maps.MapsPackage;
 import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 import com.reactnativecommunity.webview.RNCWebViewPackage;
@@ -28,6 +29,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNSentryPackage(),
             new MapsPackage(),
             new ReactNativePushNotificationPackage(),
             new RNCWebViewPackage(),
